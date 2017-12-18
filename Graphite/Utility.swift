@@ -1,6 +1,6 @@
 //
-//  GraphiteTests.swift
-//  GraphiteTests
+//  Utility.swift
+//  Graphite
 //
 //  Created by Palle Klewitz on 18.12.17.
 //  Copyright (c) 2017 Palle Klewitz
@@ -23,31 +23,33 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import XCTest
-@testable import Graphite
+import Foundation
+import Accelerate
 
-class GraphiteTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+extension Sequence {
+	func pick(_ n: Int) -> [Element] {
+		let arr = Array(self)
+		let indices = (0 ..< n).reduce([]) { (indices, _) -> [Int] in
+			let rnd = Int(arc4random_uniform(UInt32(arr.count - indices.count)))
+			let index = indices.reduce(rnd) { newIndex, existingIndex in
+				newIndex + (newIndex >= existingIndex ? 1 : 0)
+			}
+			return (indices + [index]).sorted()
+		}
+		return indices.map{arr[$0]}
+	}
+	
+	func cross<Other: Sequence>(_ other: Other) -> [(Element, Other.Element)] {
+		return self.flatMap { element -> [(Element, Other.Element)] in
+			other.map { otherElement in
+				(element, otherElement)
+			}
+		}
+	}
+}
+
+extension CGRect {
+	func extended(by length: CGFloat) -> CGRect {
+		return CGRect(x: minX - length, y: minY - length, width: width + 2 * length, height: height + 2 * length)
+	}
 }

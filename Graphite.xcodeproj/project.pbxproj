@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6527BDF1FE829F00000D4F6 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BDE1FE829F00000D4F6 /* Graph.swift */; };
+		E6527BE11FE82BC40000D4F6 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE01FE82BC40000D4F6 /* Utility.swift */; };
+		E6527BE31FE82BF30000D4F6 /* WeightedGraphAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE21FE82BF30000D4F6 /* WeightedGraphAnimator.swift */; };
+		E6527BE61FE831CC0000D4F6 /* TouchVelocityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE41FE831C80000D4F6 /* TouchVelocityTracker.swift */; };
+		E6527BE81FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE71FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift */; };
+		E6527BEA1FE833610000D4F6 /* WeightedGraphPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE91FE833610000D4F6 /* WeightedGraphPresenter.swift */; };
+		E6527BEC1FE833DE0000D4F6 /* GraphWeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BEB1FE833DE0000D4F6 /* GraphWeightView.swift */; };
 		E673A7AD1FE828970089DC57 /* Graphite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E673A7A31FE828970089DC57 /* Graphite.framework */; };
 		E673A7B21FE828970089DC57 /* GraphiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E673A7B11FE828970089DC57 /* GraphiteTests.swift */; };
 		E673A7B41FE828970089DC57 /* Graphite.h in Headers */ = {isa = PBXBuildFile; fileRef = E673A7A61FE828970089DC57 /* Graphite.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E673A7BE1FE829280089DC57 /* WeightedGraphSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E673A7BD1FE829280089DC57 /* WeightedGraphSimulator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +31,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6527BDE1FE829F00000D4F6 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		E6527BE01FE82BC40000D4F6 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		E6527BE21FE82BF30000D4F6 /* WeightedGraphAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedGraphAnimator.swift; sourceTree = "<group>"; };
+		E6527BE41FE831C80000D4F6 /* TouchVelocityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchVelocityTracker.swift; sourceTree = "<group>"; };
+		E6527BE71FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMultiPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		E6527BE91FE833610000D4F6 /* WeightedGraphPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedGraphPresenter.swift; sourceTree = "<group>"; };
+		E6527BEB1FE833DE0000D4F6 /* GraphWeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphWeightView.swift; sourceTree = "<group>"; };
 		E673A7A31FE828970089DC57 /* Graphite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Graphite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E673A7A61FE828970089DC57 /* Graphite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graphite.h; sourceTree = "<group>"; };
 		E673A7A71FE828970089DC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E673A7AC1FE828970089DC57 /* GraphiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraphiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E673A7B11FE828970089DC57 /* GraphiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphiteTests.swift; sourceTree = "<group>"; };
 		E673A7B31FE828970089DC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E673A7BD1FE829280089DC57 /* WeightedGraphSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedGraphSimulator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +89,14 @@
 			children = (
 				E673A7A61FE828970089DC57 /* Graphite.h */,
 				E673A7A71FE828970089DC57 /* Info.plist */,
+				E6527BDE1FE829F00000D4F6 /* Graph.swift */,
+				E673A7BD1FE829280089DC57 /* WeightedGraphSimulator.swift */,
+				E6527BE21FE82BF30000D4F6 /* WeightedGraphAnimator.swift */,
+				E6527BE41FE831C80000D4F6 /* TouchVelocityTracker.swift */,
+				E6527BE71FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift */,
+				E6527BE01FE82BC40000D4F6 /* Utility.swift */,
+				E6527BE91FE833610000D4F6 /* WeightedGraphPresenter.swift */,
+				E6527BEB1FE833DE0000D4F6 /* GraphWeightView.swift */,
 			);
 			path = Graphite;
 			sourceTree = "<group>";
@@ -148,6 +172,7 @@
 				TargetAttributes = {
 					E673A7A21FE828970089DC57 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					E673A7AB1FE828970089DC57 = {
@@ -196,6 +221,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6527BE31FE82BF30000D4F6 /* WeightedGraphAnimator.swift in Sources */,
+				E6527BE81FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift in Sources */,
+				E6527BDF1FE829F00000D4F6 /* Graph.swift in Sources */,
+				E673A7BE1FE829280089DC57 /* WeightedGraphSimulator.swift in Sources */,
+				E6527BEA1FE833610000D4F6 /* WeightedGraphPresenter.swift in Sources */,
+				E6527BEC1FE833DE0000D4F6 /* GraphWeightView.swift in Sources */,
+				E6527BE61FE831CC0000D4F6 /* TouchVelocityTracker.swift in Sources */,
+				E6527BE11FE82BC40000D4F6 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +367,7 @@
 		E673A7B81FE828970089DC57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -347,6 +381,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.palleklewitz.Graphite;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +390,7 @@
 		E673A7B91FE828970089DC57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -376,6 +412,7 @@
 		E673A7BB1FE828970089DC57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BPTAR52LQF;
 				INFOPLIST_FILE = GraphiteTests/Info.plist;
@@ -390,6 +427,7 @@
 		E673A7BC1FE828970089DC57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BPTAR52LQF;
 				INFOPLIST_FILE = GraphiteTests/Info.plist;

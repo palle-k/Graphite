@@ -1,6 +1,6 @@
 //
-//  GraphiteTests.swift
-//  GraphiteTests
+//  Graph.swift
+//  Graphite
 //
 //  Created by Palle Klewitz on 18.12.17.
 //  Copyright (c) 2017 Palle Klewitz
@@ -23,31 +23,44 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import XCTest
-@testable import Graphite
+import Foundation
 
-class GraphiteTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+public struct Graph: Codable {
+	public struct Edge: Codable {
+		public var nodes: Set<Int>
+		public var weight: Float
+		
+		public init(nodes: Set<Int>, weight: Float) {
+			self.nodes = nodes
+			self.weight = weight
+		}
+	}
+	
+	public var nodes: Set<Int>
+	public var edges: Set<Edge>
+	
+	public init<NodeSequence: Sequence, EdgeSequence: Sequence>(nodes: NodeSequence, edges: EdgeSequence) where NodeSequence.Element == Int, EdgeSequence.Element == Edge {
+		self.nodes = Set(nodes)
+		self.edges = Set(edges)
+	}
+}
+
+extension Graph.Edge: Hashable {
+	public var hashValue: Int {
+		return nodes.hashValue ^ weight.hashValue
+	}
+	
+	public static func ==(lhs: Graph.Edge, rhs: Graph.Edge) -> Bool {
+		return lhs.nodes == rhs.nodes && lhs.weight == rhs.weight
+	}
+}
+
+extension Graph: Hashable {
+	public var hashValue: Int {
+		return nodes.hashValue ^ edges.hashValue
+	}
+	
+	public static func ==(lhs: Graph, rhs: Graph) -> Bool {
+		return lhs.nodes == rhs.nodes && lhs.edges == rhs.edges
+	}
 }

@@ -1,6 +1,6 @@
 //
-//  GraphiteTests.swift
-//  GraphiteTests
+//  UIMultiPanGestureRecognizer.swift
+//  Graphite
 //
 //  Created by Palle Klewitz on 18.12.17.
 //  Copyright (c) 2017 Palle Klewitz
@@ -23,31 +23,39 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import XCTest
-@testable import Graphite
+import Foundation
+import UIKit
+import UIKit.UIGestureRecognizerSubclass
 
-class GraphiteTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+class UIMultiPanGestureRecognizer: UIPanGestureRecognizer {
+	private(set) var activeTouches: Set<UITouch> = []
+	
+	override func reset() {
+		super.reset()
+		activeTouches.removeAll()
+	}
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesBegan(touches, with: event)
+		guard state != .cancelled && state != .failed else {
+			return
+		}
+		activeTouches.formUnion(touches)
+	}
+	
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesEnded(touches, with: event)
+		guard state != .cancelled && state != .failed else {
+			return
+		}
+		activeTouches.subtract(touches)
+	}
+	
+	override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesCancelled(touches, with: event)
+		guard state != .cancelled && state != .failed else {
+			return
+		}
+		activeTouches.subtract(touches)
+	}
 }
