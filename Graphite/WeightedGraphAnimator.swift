@@ -36,6 +36,12 @@ open class UIWeightedGraphAnimator {
 	
 	private var displayLink: CADisplayLink?
 	
+	open var integrationSteps: Int = 1 {
+		didSet {
+			assert(integrationSteps > 0, "The number of integration steps must be greater than zero.")
+		}
+	}
+	
 	private var transform: CGAffineTransform {
 		return CGAffineTransform(scaleX: 100, y: 100).concatenating(CGAffineTransform(translationX: bounds.midX, y: bounds.midY))
 	}
@@ -89,7 +95,10 @@ open class UIWeightedGraphAnimator {
 		}
 		let delta = link.timestamp - lastUpdate
 		self.lastUpdate = link.timestamp
-		simulator.update(interval: delta)
+		
+		for _ in 0 ..< integrationSteps {
+			simulator.update(interval: delta / Double(integrationSteps))
+		}
 		
 		for (key: name, value: (position: position, velocity: _)) in self.simulator.nodes {
 			guard let item = self.items[name] else {

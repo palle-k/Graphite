@@ -30,15 +30,32 @@ import SceneKit
 import ARKit
 
 open class WeightedGraphSimulator {
-	open var graph: Graph
+	open var graph: Graph {
+		didSet {
+			weights = [:]
+			for relation in graph.edges {
+				for (a, b) in relation.nodes.cross(relation.nodes) {
+					weights[a, default: [:]][b] = relation.weight
+				}
+			}
+			
+			for node in graph.nodes where !nodes.keys.contains(node) {
+				nodes[node] = (position(for: node), Array(repeating: 0, count: dimensions))
+			}
+			
+			for node in nodes.keys where !graph.nodes.contains(node) {
+				nodes[node] = nil
+			}
+		}
+	}
 	
-	private var weights: [Int: [Int: Double]] = [:]
+	private var weights: [Int: [Int: Float]] = [:]
 	
 	public private(set) var nodes: [Int: (position: [Float], velocity: [Float])] = [:]
 	open var damping: Float = 2
 	public let dimensions: Int
 	open var radius: Float = 1
-	open var collisionRadius: Float = 0.5
+	open var collisionRadius: Float = 1
 	
 	public private(set) var interactedTags: Set<Int> = []
 	
@@ -71,7 +88,7 @@ open class WeightedGraphSimulator {
 					break
 				}
 				
-				let weight = Float(weights[node]?[otherNode] ?? 0)
+				let weight = weights[node]?[otherNode] ?? 0
 				
 				let direction = self.direction(from: position, to: otherPosition)
 				var distanceSquared: Float = 0
@@ -79,17 +96,16 @@ open class WeightedGraphSimulator {
 				let distance = sqrt(distanceSquared)
 				
 				let strength: Float = weight * 0.3 + 0.2
-				//				let expectedDistance: Float = radius * 0.5 * (1 - 0.7 * weight)
-				let expectedDistance: Float = radius * 0.5
+				let expectedDistance: Float = radius * 2
 				
 				let acceleration: Float
 				
 				if distance < collisionRadius {
-					acceleration = (-1 / distance + 1 / collisionRadius) * 20
+					acceleration = (-1 / pow(distance, 2) + 1 / pow(collisionRadius, 2)) * 10
 				} else if weight == 0 && distance > expectedDistance {
-					acceleration = -1 / distanceSquared * 0.1 * radius * radius
+					acceleration = -1 / distanceSquared * radius
 				} else {
-					acceleration = (distance - expectedDistance) / distance * strength * 50
+					acceleration = (distance - expectedDistance) / distance * strength * 20
 				}
 				
 				vDSP_vsma(direction, 1, [acceleration * Float(interval)], newVelocity, 1, &newVelocity, 1, UInt(dimensions))
@@ -129,22 +145,22 @@ open class WeightedGraphSimulator {
 	}
 	
 	func position(for tag: Int) -> [Float] {
-		if nodes.count >= 4 {
-			var average = nodes
-				.pick(4)
-				.map{$0.value.position}
-				.reduce(into: Array<Float>(repeating: 0, count: dimensions)) { (average: inout [Float], point: [Float]) in
-					vDSP_vadd(average, 1, point, 1, &average, 1, UInt(dimensions))
-			}
-			vDSP_vsdiv(average, 1, [4], &average, 1, UInt(dimensions))
-			return average
-		}
-		
+//		if nodes.count >= 4 {
+//			var average = nodes
+//				.pick(4)
+//				.map{$0.value.position}
+//				.reduce(into: Array<Float>(repeating: 0, count: dimensions)) { (average: inout [Float], point: [Float]) in
+//					vDSP_vadd(average, 1, point, 1, &average, 1, UInt(dimensions))
+//			}
+//			vDSP_vsdiv(average, 1, [4], &average, 1, UInt(dimensions))
+//			return average
+//		}
+//
 		if dimensions == 2 {
 			let angle = Float(drand48()) * 2 * .pi
 			return [
-				cos(angle) * radius * 0.5 + center[0],
-				sin(angle) * radius * 0.5 + center[1]
+				cos(angle) * radius * 5 + center[0],
+				sin(angle) * radius * 5 + center[1]
 			]
 		} else {
 			return (0..<dimensions).map({_ in Float(drand48())})
@@ -155,6 +171,15 @@ open class WeightedGraphSimulator {
 	private final func direction(from p1: [Float], to p2: [Float]) -> [Float] {
 		var result: [Float] = Array(repeating: 0, count: p1.count)
 		vDSP_vsub(p1, 1, p2, 1, &result, 1, UInt(p1.count))
+		return result
+	}
+	
+	@inline(__always)
+	private final func normalize(_ vector: [Float]) -> [Float] {
+		var distanceSquared: Float = 0
+		vDSP_svesq(vector, 1, &distanceSquared, UInt(dimensions))
+		var result = vector
+		vDSP_vsdiv(vector, 1, [sqrt(distanceSquared)], &result, 1, UInt(dimensions))
 		return result
 	}
 	

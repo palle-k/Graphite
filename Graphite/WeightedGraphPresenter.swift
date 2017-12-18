@@ -65,12 +65,14 @@ public class WeightedGraphPresenter {
 		let leftConstraint = NSLayoutConstraint(item: edgeView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
 		let bottomConstraint = NSLayoutConstraint(item: edgeView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
 		let rightConstraint = NSLayoutConstraint(item: edgeView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0)
+		edgeView.translatesAutoresizingMaskIntoConstraints = false
 		
 		view.addConstraints([topContraint, leftConstraint, bottomConstraint, rightConstraint])
 		
 		animator.onUpdate = {
 			self.edgeView.layer.setNeedsDisplay()
 		}
+		animator.integrationSteps = 4
 		
 		let panRecognizer = UIMultiPanGestureRecognizer(target: self, action: #selector(self.didPan(_:)))
 		edgeView.addGestureRecognizer(panRecognizer)
@@ -91,8 +93,10 @@ public class WeightedGraphPresenter {
 		
 		let addedNodes = graph.nodes.subtracting(existingNodes)
 		let addedNodeViews = addedNodes.map {($0, self.delegate?.view(for: $0, presenter: self) ?? UIView())}
+		nodeViews.merge(addedNodeViews, uniquingKeysWith: {a, _ in a})
 		
 		removedNodes.forEach(animator.removeItem)
+		
 		
 		addedNodeViews.map {$0.1}.forEach(self.edgeView.addSubview)
 		addedNodeViews.forEach { node, view in
@@ -129,7 +133,6 @@ public class WeightedGraphPresenter {
 				}
 			}
 		) // UIView.animate
-		
 	}
 	
 	public func start() {
