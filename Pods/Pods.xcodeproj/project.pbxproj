@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0126F89704B53FCA2CB4339789CAFFD5 /* Pods-GraphiteTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D94F42DD50C9675C12214377141DE4D6 /* Pods-GraphiteTests-dummy.m */; };
+		0C40508A383A0D7AF53EDB40928A8FA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		5B07C3B1D443C35A389DF84D5CB54D1C /* Pods-Graphite-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E6E1F3817700EE408290E968D244D /* Pods-Graphite-dummy.m */; };
+		B7B6A7AAE1C9FF6F8FFDFC2C85D49B81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		B7D567A62A54633E66FE4012814937AC /* Pods-Graphite-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CAAD84A459A24FD7FC0E9129B821C8B7 /* Pods-Graphite-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA2732212472F7C0C477544E49F83709 /* Pods-GraphiteTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E245B6970617F356D6CF55C3A9101ABA /* Pods-GraphiteTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0EBA82BB25F8305F153C315BBCFC500E /* Pods-GraphiteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GraphiteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		200ED31364826B30E2CFC718D8D16E09 /* Pods-GraphiteTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GraphiteTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		227EF034573A317442C0F03E8124B8EA /* Pods-GraphiteTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-GraphiteTests.modulemap"; sourceTree = "<group>"; };
+		252E6E1F3817700EE408290E968D244D /* Pods-Graphite-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Graphite-dummy.m"; sourceTree = "<group>"; };
+		3111CDB1030B8D3C5BC6BA0B050840CB /* Pods-GraphiteTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GraphiteTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		317E69C06D43E52AB0BE7553629E7E99 /* Pods-Graphite-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Graphite-resources.sh"; sourceTree = "<group>"; };
+		3437BC93048085FFDE7405E2F222BAEF /* Pods-GraphiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GraphiteTests.release.xcconfig"; sourceTree = "<group>"; };
+		520E858CEA226222F1DA6975E58C5802 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5261C98426FBC0AD7E1094DD1A6C92FB /* Pods-GraphiteTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GraphiteTests-resources.sh"; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		737B8688A960266B9433EF1AB33C4EAD /* Pods-Graphite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Graphite.debug.xcconfig"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		963D3B21E81ABE74F3B65B2B8C07BA2A /* Pods_GraphiteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GraphiteTests.framework; path = "Pods-GraphiteTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC3934964FF03CBF6840EC7C9D49804 /* Pods_Graphite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Graphite.framework; path = "Pods-Graphite.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EE9DF1C4766F41641FDCFE2D4842433 /* Pods-Graphite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Graphite.release.xcconfig"; sourceTree = "<group>"; };
+		A18D29E2E110BD63428814FF8C1C2BA8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5C4B47C05D8A901608112356C5DD888 /* Pods-Graphite.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Graphite.modulemap"; sourceTree = "<group>"; };
+		C7E50C3CCE06EBAEB888976C7DF6E07A /* Pods-Graphite-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Graphite-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CAAD84A459A24FD7FC0E9129B821C8B7 /* Pods-Graphite-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Graphite-umbrella.h"; sourceTree = "<group>"; };
+		D4D3092BECE82266DC23586334F0C5C4 /* Pods-Graphite-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Graphite-acknowledgements.plist"; sourceTree = "<group>"; };
+		D6B379645ADD53BF8004002CAB589B72 /* Pods-GraphiteTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GraphiteTests-frameworks.sh"; sourceTree = "<group>"; };
+		D94F42DD50C9675C12214377141DE4D6 /* Pods-GraphiteTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GraphiteTests-dummy.m"; sourceTree = "<group>"; };
+		E245B6970617F356D6CF55C3A9101ABA /* Pods-GraphiteTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GraphiteTests-umbrella.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F1181D3634D792295C789B8BDDAD206 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C40508A383A0D7AF53EDB40928A8FA3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1E63741B2F03E40F618C9B38F995F81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7B6A7AAE1C9FF6F8FFDFC2C85D49B81 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0BEAC715334FFA83EC54DD7E081CEA56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9AC3934964FF03CBF6840EC7C9D49804 /* Pods_Graphite.framework */,
+				963D3B21E81ABE74F3B65B2B8C07BA2A /* Pods_GraphiteTests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E64B7F4C9500DD8F8FCC2D06CEF246E /* Pods-GraphiteTests */ = {
+			isa = PBXGroup;
+			children = (
+				A18D29E2E110BD63428814FF8C1C2BA8 /* Info.plist */,
+				227EF034573A317442C0F03E8124B8EA /* Pods-GraphiteTests.modulemap */,
+				200ED31364826B30E2CFC718D8D16E09 /* Pods-GraphiteTests-acknowledgements.markdown */,
+				3111CDB1030B8D3C5BC6BA0B050840CB /* Pods-GraphiteTests-acknowledgements.plist */,
+				D94F42DD50C9675C12214377141DE4D6 /* Pods-GraphiteTests-dummy.m */,
+				D6B379645ADD53BF8004002CAB589B72 /* Pods-GraphiteTests-frameworks.sh */,
+				5261C98426FBC0AD7E1094DD1A6C92FB /* Pods-GraphiteTests-resources.sh */,
+				E245B6970617F356D6CF55C3A9101ABA /* Pods-GraphiteTests-umbrella.h */,
+				0EBA82BB25F8305F153C315BBCFC500E /* Pods-GraphiteTests.debug.xcconfig */,
+				3437BC93048085FFDE7405E2F222BAEF /* Pods-GraphiteTests.release.xcconfig */,
+			);
+			name = "Pods-GraphiteTests";
+			path = "Target Support Files/Pods-GraphiteTests";
+			sourceTree = "<group>";
+		};
+		5F7F2E54C41BF9722F9483EFAF22DB60 /* Pods-Graphite */ = {
+			isa = PBXGroup;
+			children = (
+				520E858CEA226222F1DA6975E58C5802 /* Info.plist */,
+				B5C4B47C05D8A901608112356C5DD888 /* Pods-Graphite.modulemap */,
+				C7E50C3CCE06EBAEB888976C7DF6E07A /* Pods-Graphite-acknowledgements.markdown */,
+				D4D3092BECE82266DC23586334F0C5C4 /* Pods-Graphite-acknowledgements.plist */,
+				252E6E1F3817700EE408290E968D244D /* Pods-Graphite-dummy.m */,
+				317E69C06D43E52AB0BE7553629E7E99 /* Pods-Graphite-resources.sh */,
+				CAAD84A459A24FD7FC0E9129B821C8B7 /* Pods-Graphite-umbrella.h */,
+				737B8688A960266B9433EF1AB33C4EAD /* Pods-Graphite.debug.xcconfig */,
+				9EE9DF1C4766F41641FDCFE2D4842433 /* Pods-Graphite.release.xcconfig */,
+			);
+			name = "Pods-Graphite";
+			path = "Target Support Files/Pods-Graphite";
+			sourceTree = "<group>";
+		};
+		64A55313A34929A8DE5D8B08C65ED676 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5F7F2E54C41BF9722F9483EFAF22DB60 /* Pods-Graphite */,
+				0E64B7F4C9500DD8F8FCC2D06CEF246E /* Pods-GraphiteTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				0BEAC715334FFA83EC54DD7E081CEA56 /* Products */,
+				64A55313A34929A8DE5D8B08C65ED676 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		68E67076F4E1B5C74CACA022E4423B00 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7D567A62A54633E66FE4012814937AC /* Pods-Graphite-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE91632B3BFF8564E820D6F80B23C85C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA2732212472F7C0C477544E49F83709 /* Pods-GraphiteTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		01D7286256BC703FDF9C43E1654AD744 /* Pods-Graphite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 229FD89F5769444406EF9343A8145B66 /* Build configuration list for PBXNativeTarget "Pods-Graphite" */;
+			buildPhases = (
+				031A8CF153360BCBDE1131B6AABDD982 /* Sources */,
+				6F1181D3634D792295C789B8BDDAD206 /* Frameworks */,
+				68E67076F4E1B5C74CACA022E4423B00 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Graphite";
+			productName = "Pods-Graphite";
+			productReference = 9AC3934964FF03CBF6840EC7C9D49804 /* Pods_Graphite.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		99D0F4AFDE16B4E242B1C53A556C04F1 /* Pods-GraphiteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD95CFBEF333214F84AEA346C99F18D5 /* Build configuration list for PBXNativeTarget "Pods-GraphiteTests" */;
+			buildPhases = (
+				2433DA14C0996F4CCC6A5B9D3CD3A3B2 /* Sources */,
+				E1E63741B2F03E40F618C9B38F995F81 /* Frameworks */,
+				BE91632B3BFF8564E820D6F80B23C85C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-GraphiteTests";
+			productName = "Pods-GraphiteTests";
+			productReference = 963D3B21E81ABE74F3B65B2B8C07BA2A /* Pods_GraphiteTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 0BEAC715334FFA83EC54DD7E081CEA56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01D7286256BC703FDF9C43E1654AD744 /* Pods-Graphite */,
+				99D0F4AFDE16B4E242B1C53A556C04F1 /* Pods-GraphiteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		031A8CF153360BCBDE1131B6AABDD982 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B07C3B1D443C35A389DF84D5CB54D1C /* Pods-Graphite-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2433DA14C0996F4CCC6A5B9D3CD3A3B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0126F89704B53FCA2CB4339789CAFFD5 /* Pods-GraphiteTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1304366CBDDB9C5D3D97B8636F843DC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3437BC93048085FFDE7405E2F222BAEF /* Pods-GraphiteTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GraphiteTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GraphiteTests/Pods-GraphiteTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_GraphiteTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		39C5BC78A31CDE101068C530CAC7FA0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		5E88E6EACB868A37FB2D8062B73A6272 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EBA82BB25F8305F153C315BBCFC500E /* Pods-GraphiteTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GraphiteTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GraphiteTests/Pods-GraphiteTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_GraphiteTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		89C8BB24E37B25BAEEB8FBA01EE05DAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		A0E8E2505682F1DC21BEC20BE400AA2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EE9DF1C4766F41641FDCFE2D4842433 /* Pods-Graphite.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Graphite/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Graphite/Pods-Graphite.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Graphite;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D378D1126154DF6B22704A8F859DC106 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 737B8688A960266B9433EF1AB33C4EAD /* Pods-Graphite.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Graphite/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Graphite/Pods-Graphite.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Graphite;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		229FD89F5769444406EF9343A8145B66 /* Build configuration list for PBXNativeTarget "Pods-Graphite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D378D1126154DF6B22704A8F859DC106 /* Debug */,
+				A0E8E2505682F1DC21BEC20BE400AA2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39C5BC78A31CDE101068C530CAC7FA0F /* Debug */,
+				89C8BB24E37B25BAEEB8FBA01EE05DAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD95CFBEF333214F84AEA346C99F18D5 /* Build configuration list for PBXNativeTarget "Pods-GraphiteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E88E6EACB868A37FB2D8062B73A6272 /* Debug */,
+				1304366CBDDB9C5D3D97B8636F843DC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
