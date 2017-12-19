@@ -67,7 +67,12 @@ open class WeightedGraphSimulator {
 	
 	private var weights: [Int: [Int: Float]] = [:]
 	
-	private(set) var nodes: [Int: (position: UnsafeMutablePointer<Float>, velocity: UnsafeMutablePointer<Float>)] = [:]
+	private var nodes: [Int: (position: UnsafeMutablePointer<Float>, velocity: UnsafeMutablePointer<Float>)] = [:]
+	public var nodePositions: [Int: UnsafePointer<Float>] {
+		return nodes.mapValues { position, _ in
+			UnsafePointer(position)
+		}
+	}
 	
 	open var damping: Float = 2
 	public let dimensions: Int

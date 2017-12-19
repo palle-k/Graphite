@@ -103,7 +103,7 @@ open class UIWeightedGraphAnimator {
 			simulator.update(interval: delta / Double(integrationSteps))
 		}
 		
-		for (key: name, value: (position: position, velocity: _)) in self.simulator.nodes {
+		for (name, position) in self.simulator.nodePositions {
 			guard let item = self.items[name] else {
 				continue
 			}
