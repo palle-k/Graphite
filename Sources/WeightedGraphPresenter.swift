@@ -147,7 +147,9 @@ public class WeightedGraphPresenter {
 		interactor.nodeViews.merge(addedNodeViews, uniquingKeysWith: {a, _ in a})
 		
 		removedNodes.forEach(animator.removeItem)
-		
+		removedNodes.forEach { node in
+			self.interactor.nodeViews.removeValue(forKey: node)
+		}
 		
 		addedNodeViews.map {$0.1}.forEach(self.edgeView.addSubview)
 		addedNodeViews.forEach { node, view in
