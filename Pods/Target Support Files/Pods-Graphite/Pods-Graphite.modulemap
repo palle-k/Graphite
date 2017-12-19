@@ -1,6 +1,0 @@
-framework module Pods_Graphite {
-  umbrella header "Pods-Graphite-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84A453F19F641C332D6F82C7 /* Pods_Graphite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18324AC849E6B9BD3EA610AF /* Pods_Graphite.framework */; };
-		8F7670CCA53002470245D69A /* Pods_GraphiteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640482AA595C279511512FEB /* Pods_GraphiteTests.framework */; };
+		E62784ED1FE92E4D00CBC689 /* WeightedGraphInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62784EC1FE92E4D00CBC689 /* WeightedGraphInteractor.swift */; };
 		E6527BDF1FE829F00000D4F6 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BDE1FE829F00000D4F6 /* Graph.swift */; };
 		E6527BE11FE82BC40000D4F6 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE01FE82BC40000D4F6 /* Utility.swift */; };
 		E6527BE31FE82BF30000D4F6 /* WeightedGraphAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6527BE21FE82BF30000D4F6 /* WeightedGraphAnimator.swift */; };
@@ -33,12 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0CCA35F6D8AEFCC541DA51F2 /* Pods-Graphite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graphite.release.xcconfig"; path = "Pods/Target Support Files/Pods-Graphite/Pods-Graphite.release.xcconfig"; sourceTree = "<group>"; };
-		18324AC849E6B9BD3EA610AF /* Pods_Graphite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Graphite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		640482AA595C279511512FEB /* Pods_GraphiteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GraphiteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A37DBFD6B2C4524EF17C728B /* Pods-GraphiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphiteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GraphiteTests/Pods-GraphiteTests.release.xcconfig"; sourceTree = "<group>"; };
-		AC519B79A6BD9BA75993FF4B /* Pods-Graphite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graphite.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Graphite/Pods-Graphite.debug.xcconfig"; sourceTree = "<group>"; };
-		E3CE55471B2A45FF2180D1B9 /* Pods-GraphiteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphiteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GraphiteTests/Pods-GraphiteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E62784EC1FE92E4D00CBC689 /* WeightedGraphInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedGraphInteractor.swift; sourceTree = "<group>"; };
 		E6527BDE1FE829F00000D4F6 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		E6527BE01FE82BC40000D4F6 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E6527BE21FE82BF30000D4F6 /* WeightedGraphAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedGraphAnimator.swift; sourceTree = "<group>"; };
@@ -60,7 +54,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A453F19F641C332D6F82C7 /* Pods_Graphite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,29 +62,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E673A7AD1FE828970089DC57 /* Graphite.framework in Frameworks */,
-				8F7670CCA53002470245D69A /* Pods_GraphiteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7A6EAB8CFA2EFBA5D52A793E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AC519B79A6BD9BA75993FF4B /* Pods-Graphite.debug.xcconfig */,
-				0CCA35F6D8AEFCC541DA51F2 /* Pods-Graphite.release.xcconfig */,
-				E3CE55471B2A45FF2180D1B9 /* Pods-GraphiteTests.debug.xcconfig */,
-				A37DBFD6B2C4524EF17C728B /* Pods-GraphiteTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		8133E8FE41AC7B6CABECF17F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				18324AC849E6B9BD3EA610AF /* Pods_Graphite.framework */,
-				640482AA595C279511512FEB /* Pods_GraphiteTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,7 +81,6 @@
 				E673A7A51FE828970089DC57 /* Graphite */,
 				E673A7B01FE828970089DC57 /* GraphiteTests */,
 				E673A7A41FE828970089DC57 /* Products */,
-				7A6EAB8CFA2EFBA5D52A793E /* Pods */,
 				8133E8FE41AC7B6CABECF17F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -128,9 +106,11 @@
 				E6527BE71FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift */,
 				E6527BE01FE82BC40000D4F6 /* Utility.swift */,
 				E6527BE91FE833610000D4F6 /* WeightedGraphPresenter.swift */,
+				E62784EC1FE92E4D00CBC689 /* WeightedGraphInteractor.swift */,
 				E6527BEB1FE833DE0000D4F6 /* GraphWeightView.swift */,
 			);
-			path = Graphite;
+			name = Graphite;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		E673A7B01FE828970089DC57 /* GraphiteTests */ = {
@@ -160,12 +140,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E673A7B71FE828970089DC57 /* Build configuration list for PBXNativeTarget "Graphite" */;
 			buildPhases = (
-				CFFD8FC9E23C5E858451BE8D /* [CP] Check Pods Manifest.lock */,
 				E673A79E1FE828970089DC57 /* Sources */,
 				E673A79F1FE828970089DC57 /* Frameworks */,
 				E673A7A01FE828970089DC57 /* Headers */,
 				E673A7A11FE828970089DC57 /* Resources */,
-				B2CDEB4C7FF1C5FC0140DFC2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -302,39 +280,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GraphiteTests/Pods-GraphiteTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B2CDEB4C7FF1C5FC0140DFC2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Graphite/Pods-Graphite-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CFFD8FC9E23C5E858451BE8D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Graphite-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -344,6 +289,7 @@
 			files = (
 				E6527BE31FE82BF30000D4F6 /* WeightedGraphAnimator.swift in Sources */,
 				E6527BE81FE831F40000D4F6 /* UIMultiPanGestureRecognizer.swift in Sources */,
+				E62784ED1FE92E4D00CBC689 /* WeightedGraphInteractor.swift in Sources */,
 				E6527BDF1FE829F00000D4F6 /* Graph.swift in Sources */,
 				E673A7BE1FE829280089DC57 /* WeightedGraphSimulator.swift in Sources */,
 				E6527BEA1FE833610000D4F6 /* WeightedGraphPresenter.swift in Sources */,
@@ -487,7 +433,6 @@
 		};
 		E673A7B81FE828970089DC57 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC519B79A6BD9BA75993FF4B /* Pods-Graphite.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -497,7 +442,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Graphite/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.palleklewitz.Graphite;
@@ -511,7 +456,6 @@
 		};
 		E673A7B91FE828970089DC57 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CCA35F6D8AEFCC541DA51F2 /* Pods-Graphite.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -521,7 +465,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Graphite/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.palleklewitz.Graphite;
@@ -534,7 +478,6 @@
 		};
 		E673A7BB1FE828970089DC57 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3CE55471B2A45FF2180D1B9 /* Pods-GraphiteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -550,7 +493,6 @@
 		};
 		E673A7BC1FE828970089DC57 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A37DBFD6B2C4524EF17C728B /* Pods-GraphiteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

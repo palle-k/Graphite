@@ -29,9 +29,9 @@ import QuartzCore
 
 open class UIWeightedGraphAnimator {
 	
-	var items: [Int: UIDynamicItem] = [:]
+	public private(set) var items: [Int: UIDynamicItem] = [:]
 	open var bounds: CGRect
-	let simulator: WeightedGraphSimulator
+	open let simulator: WeightedGraphSimulator
 	open var onUpdate: (() -> ())? = nil
 	
 	private var displayLink: CADisplayLink?
@@ -43,7 +43,7 @@ open class UIWeightedGraphAnimator {
 	}
 	
 	private var transform: CGAffineTransform {
-		return CGAffineTransform(scaleX: 100, y: 100).concatenating(CGAffineTransform(translationX: bounds.midX, y: bounds.midY))
+		return CGAffineTransform(scaleX: 20, y: 20).concatenating(CGAffineTransform(translationX: bounds.midX, y: bounds.midY))
 	}
 	
 	open var graph: Graph {
@@ -74,6 +74,15 @@ open class UIWeightedGraphAnimator {
 		}
 		set {
 			simulator.radius = Float(newValue / min(transform.a, transform.d))
+		}
+	}
+	
+	open var collisionDistance: CGFloat {
+		get {
+			return CGFloat(simulator.collisionRadius) * min(transform.a, transform.d)
+		}
+		set {
+			simulator.collisionRadius = Float(newValue / min(transform.a, transform.d))
 		}
 	}
 	

@@ -28,6 +28,11 @@ import UIKit
 
 open class GraphWeightView: UIView {
 	public var weights: [(UIView, UIView, Double)] = []
+	public var strokeColor: UIColor = .white {
+		didSet {
+			layer.setNeedsDisplay()
+		}
+	}
 	
 	var onLayout: (() -> ())? = nil
 	
@@ -45,7 +50,7 @@ open class GraphWeightView: UIView {
 		}
 		
 		ctx.clear(self.bounds)
-		ctx.setStrokeColor(UIColor.white.cgColor)
+		ctx.setStrokeColor(strokeColor.cgColor)
 		
 		for (v1, v2, weight) in weights {
 			ctx.move(to: v1.center)

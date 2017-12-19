@@ -40,22 +40,39 @@ open class WeightedGraphSimulator {
 			}
 			
 			for node in graph.nodes where !nodes.keys.contains(node) {
-				nodes[node] = (position(for: node), Array(repeating: 0, count: dimensions))
+				let position = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
+				position.assign(from: self.position(for: node), count: dimensions)
+				let velocity = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
+				velocity.assign(from: Array<Float>(repeating: 0, count: dimensions), count: dimensions)
+				
+				nodes[node] = (position, velocity)
 			}
 			
 			for node in nodes.keys where !graph.nodes.contains(node) {
+				if let (position, velocity) = nodes[node] {
+					position.deallocate(capacity: dimensions)
+					velocity.deallocate(capacity: dimensions)
+				}
 				nodes[node] = nil
 			}
 		}
 	}
 	
+	deinit {
+		nodes.values.forEach { position, velocity in
+			position.deallocate(capacity: dimensions)
+			velocity.deallocate(capacity: dimensions)
+		}
+	}
+	
 	private var weights: [Int: [Int: Float]] = [:]
 	
-	public private(set) var nodes: [Int: (position: [Float], velocity: [Float])] = [:]
+	private(set) var nodes: [Int: (position: UnsafeMutablePointer<Float>, velocity: UnsafeMutablePointer<Float>)] = [:]
+	
 	open var damping: Float = 2
 	public let dimensions: Int
-	open var radius: Float = 1
-	open var collisionRadius: Float = 1
+	open var radius: Float = 2
+	open var collisionRadius: Float = 0.5
 	
 	public private(set) var interactedTags: Set<Int> = []
 	
@@ -74,93 +91,104 @@ open class WeightedGraphSimulator {
 	}
 	
 	open func update(interval: TimeInterval) {
+		// Updates only velocities
+		updateRelationalVelocities(interval: interval)
+		removeGlobalDrift(interval: interval)
 		
-		let previousNodes = self.nodes
+		// Write new positions
+		applyVelocities(interval: interval)
+		recenterGraph()
+	}
+	
+	@inline(__always)
+	private final func updateRelationalVelocities(interval: TimeInterval) {
+		let direction = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
+		defer {
+			direction.deallocate(capacity: dimensions)
+		}
 		
-		for (key: node, value: (position: position, velocity: velocity)) in previousNodes where !interactedTags.contains(node) {
+		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedTags.contains(node) {
 			
-			var newPosition = position
-			var newVelocity = velocity
+			let nodeWeights = weights[node] ?? [:]
 			
-			for (key: otherNode, value: (position: otherPosition, velocity: _)) in previousNodes where otherNode != node {
-				if position == otherPosition {
-					newPosition = self.position(for: node)
-					break
-				}
+			for (key: otherNode, value: (position: otherPosition, velocity: _)) in nodes where otherNode != node {
+				let weight = nodeWeights[otherNode] ?? 0
 				
-				let weight = weights[node]?[otherNode] ?? 0
+				self.directionVector(from: position, to: otherPosition, result: direction)
 				
-				let direction = self.direction(from: position, to: otherPosition)
+				// Calculating distance between the nodes
 				var distanceSquared: Float = 0
 				vDSP_distancesq(position, 1, otherPosition, 1, &distanceSquared, UInt(dimensions))
 				let distance = sqrt(distanceSquared)
 				
 				let strength: Float = weight * 0.3 + 0.2
-				let expectedDistance: Float = radius * 2
+				let expectedDistance: Float = radius
 				
 				let acceleration: Float
 				
 				if distance < collisionRadius {
 					acceleration = (-1 / pow(distance, 2) + 1 / pow(collisionRadius, 2)) * 10
-				} else if weight == 0 && distance > expectedDistance {
+				} else if weight == 0 {
 					acceleration = -1 / distanceSquared * radius
 				} else {
 					acceleration = (distance - expectedDistance) / distance * strength * 20
 				}
 				
-				vDSP_vsma(direction, 1, [acceleration * Float(interval)], newVelocity, 1, &newVelocity, 1, UInt(dimensions))
+				// Apply acceleration to velocity
+				vDSP_vsma(direction, 1, [acceleration * Float(interval)], velocity, 1, velocity, 1, UInt(dimensions))
 			}
 			
-			vDSP_vsma(centerAcceleration(from: newPosition), 1, [3 * Float(interval) / radius], newVelocity, 1, &newVelocity, 1, UInt(dimensions))
+			// Applying acceleration towards center point
+			self.addCenterAcceleration(from: position, with: 10 * Float(interval) / radius, to: velocity, buffer: direction)
 			
-			vDSP_vsmul(newVelocity, 1, [1 - damping * Float(interval)], &newVelocity, 1, UInt(dimensions))
-			
-			self.nodes[node] = (position: newPosition, velocity: newVelocity)
+			// Apply velocity damping
+			vDSP_vsmul(velocity, 1, [1 - damping * Float(interval)], velocity, 1, UInt(dimensions))
 		}
-		
+	}
+	
+	@inline(__always)
+	private final func removeGlobalDrift(interval: TimeInterval) {
 		var driftVelocity = nodes.reduce(into: [Float](repeating: 0, count: dimensions)) { (result: inout ([Float]), element) in
-			vDSP_vadd(result, 1, element.value.velocity, 1, &result, 1, UInt(self.dimensions))
+			vDSP_vadd(result, 1, element.value.velocity, 1, &result, 1, UInt(dimensions))
 		}
-		vDSP_vsdiv(driftVelocity, 1, [Float(max(1, previousNodes.count))], &driftVelocity, 1, UInt(dimensions))
+		vDSP_vsdiv(driftVelocity, 1, [Float(max(1, nodes.count))], &driftVelocity, 1, UInt(dimensions))
 		
+		for (key: node, value: (position: _, velocity: velocity)) in nodes where !interactedTags.contains(node) {
+			vDSP_vsub(driftVelocity, 1, velocity, 1, velocity, 1, UInt(dimensions))
+		}
+	}
+	
+	@inline(__always)
+	private final func applyVelocities(interval: TimeInterval) {
 		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedTags.contains(node) {
-			var newVelocity = velocity
-			var newPosition = position
-			vDSP_vsub(driftVelocity, 1, velocity, 1, &newVelocity, 1, UInt(dimensions))
-			vDSP_vsma(newVelocity, 1, [Float(interval)], newPosition, 1, &newPosition, 1, UInt(dimensions))
-			self.nodes[node] = (position: newPosition, velocity: newVelocity)
+			vDSP_vsma(velocity, 1, [Float(interval)], position, 1, position, 1, UInt(dimensions))
+		}
+	}
+	
+	@inline(__always)
+	private func recenterGraph() {
+		let centerDirection = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
+		defer {
+			centerDirection.deallocate(capacity: dimensions)
 		}
 		
 		var nodeCenter = nodes.reduce(into: [Float](repeating: 0, count: dimensions)) { (result: inout ([Float]), element) in
 			vDSP_vadd(result, 1, element.value.position, 1, &result, 1, UInt(self.dimensions))
 		}
-		vDSP_vsdiv(nodeCenter, 1, [Float(max(1, previousNodes.count))], &nodeCenter, 1, UInt(dimensions))
-		let centerDirection = direction(from: nodeCenter, to: self.center)
+		vDSP_vsdiv(nodeCenter, 1, [Float(max(1, nodes.count))], &nodeCenter, 1, UInt(dimensions))
+		directionVector(from: nodeCenter, to: self.center, result: centerDirection)
 		
-		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedTags.contains(node) {
-			var newPosition = position
-			vDSP_vadd(position, 1, centerDirection, 1, &newPosition, 1, UInt(dimensions))
-			self.nodes[node] = (position: newPosition, velocity: velocity)
+		for (key: node, value: (position: position, velocity: _)) in nodes where !interactedTags.contains(node) {
+			vDSP_vadd(position, 1, centerDirection, 1, position, 1, UInt(dimensions))
 		}
 	}
 	
 	func position(for tag: Int) -> [Float] {
-//		if nodes.count >= 4 {
-//			var average = nodes
-//				.pick(4)
-//				.map{$0.value.position}
-//				.reduce(into: Array<Float>(repeating: 0, count: dimensions)) { (average: inout [Float], point: [Float]) in
-//					vDSP_vadd(average, 1, point, 1, &average, 1, UInt(dimensions))
-//			}
-//			vDSP_vsdiv(average, 1, [4], &average, 1, UInt(dimensions))
-//			return average
-//		}
-//
 		if dimensions == 2 {
 			let angle = Float(drand48()) * 2 * .pi
 			return [
-				cos(angle) * radius * 5 + center[0],
-				sin(angle) * radius * 5 + center[1]
+				cos(angle) * radius * sqrt(Float(nodes.count)) + center[0],
+				sin(angle) * radius * sqrt(Float(nodes.count)) + center[1]
 			]
 		} else {
 			return (0..<dimensions).map({_ in Float(drand48())})
@@ -168,10 +196,8 @@ open class WeightedGraphSimulator {
 	}
 	
 	@inline(__always)
-	private final func direction(from p1: [Float], to p2: [Float]) -> [Float] {
-		var result: [Float] = Array(repeating: 0, count: p1.count)
-		vDSP_vsub(p1, 1, p2, 1, &result, 1, UInt(p1.count))
-		return result
+	private final func directionVector(from p1: UnsafePointer<Float>, to p2: UnsafePointer<Float>, result: UnsafeMutablePointer<Float>) {
+		vDSP_vsub(p1, 1, p2, 1, result, 1, UInt(dimensions))
 	}
 	
 	@inline(__always)
@@ -184,17 +210,20 @@ open class WeightedGraphSimulator {
 	}
 	
 	@inline(__always)
-	private final func centerAcceleration(from point: [Float]) -> [Float] {
-		var dir = direction(from: point, to: center)
+	private final func addCenterAcceleration(from point: UnsafePointer<Float>, with factor: Float, to result: UnsafeMutablePointer<Float>, buffer: UnsafeMutablePointer<Float>) {
+		let dir = buffer
+		directionVector(from: point, to: center, result: dir)
 		var distanceSquared: Float = 0
 		vDSP_distancesq(point, 1, center, 1, &distanceSquared, UInt(dimensions))
 		let distance = sqrt(distanceSquared)
-		vDSP_vsmul(dir, 1, [1 / (distance + 1)], &dir, 1, UInt(dimensions))
-		return dir
+		vDSP_vsma(dir, 1, [1 / (distance + 1) * factor], result, 1, result, 1, UInt(dimensions))
 	}
 	
 	public func set(location: [Float], for key: Int) {
-		nodes[key] = (location, Array(repeating: 0, count: dimensions))
+		guard let (l, _) = nodes[key] else {
+			return
+		}
+		l.assign(from: location, count: dimensions)
 	}
 	
 	public func beginUserInteraction(on node: Int) {
@@ -207,6 +236,9 @@ open class WeightedGraphSimulator {
 	
 	public func endUserInteraction(on node: Int, with velocity: [Float]) {
 		interactedTags.remove(node)
-		nodes[node]?.velocity = velocity
+		guard let (_, v) = nodes[node] else {
+			return
+		}
+		v.assign(from: velocity, count: dimensions)
 	}
 }
