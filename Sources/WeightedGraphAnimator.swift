@@ -55,17 +55,11 @@ open class UIWeightedGraphAnimator {
 		}
 	}
 	
-	open var center: CGPoint {
-		get {
-			return CGPoint(
-				x: CGFloat(simulator.center[0]),
-				y: CGFloat(simulator.center[1])
-				).applying(transform)
-		}
-		set {
-			let transformed = newValue.applying(transform.inverted())
-			simulator.center = [transformed.x, transformed.y].map(Float.init)
-		}
+	public var center: CGPoint {
+		return CGPoint(
+			x: CGFloat(simulator.center[0]),
+			y: CGFloat(simulator.center[1])
+		).applying(transform)
 	}
 	
 	open var radius: CGFloat {
@@ -161,5 +155,17 @@ open class UIWeightedGraphAnimator {
 	
 	public func endUserInteraction(on node: Int, with velocity: CGVector) {
 		simulator.endUserInteraction(on: node, with: [Float(velocity.dx / transform.a), Float(velocity.dy / transform.d)])
+	}
+	
+	public func setCenter(_ center: CGPoint) {
+		let transformed = center.applying(transform.inverted())
+		simulator.center = [transformed.x, transformed.y].map(Float.init)
+		simulator.centerVelocity = Array(repeating: 0, count: 2)
+	}
+	
+	public func setCenter(_ center: CGPoint, inerialVelocity: CGVector) {
+		let transformed = center.applying(transform.inverted())
+		simulator.center = [transformed.x, transformed.y].map(Float.init)
+		simulator.centerVelocity = [inerialVelocity.dx / transform.a, inerialVelocity.dy / transform.d].map(Float.init)
 	}
 }

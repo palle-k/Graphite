@@ -15,14 +15,14 @@ class WeightedGraphInteractor {
 		return Dictionary(nodeViews.map {($1, $0)}, uniquingKeysWith: {a, _ in a})
 	}
 	
-	private let view: UIView
+	private let view: GraphWeightView
 	private let animator: UIWeightedGraphAnimator
 	
 	private var knownTouches: Set<UITouch> = []
 	private var pannedViews: [UITouch: UIView] = [:]
 	private var velocityTracker = TouchVelocityTracker()
 	
-	init(view: UIView, animator: UIWeightedGraphAnimator) {
+	init(view: GraphWeightView, animator: UIWeightedGraphAnimator) {
 		self.view = view
 		self.animator = animator
 		
@@ -31,6 +31,10 @@ class WeightedGraphInteractor {
 		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(self.didPinch(_:)))
 		view.addGestureRecognizer(pinchRecognizer)
+		
+		view.onTouchesBegan = {
+			self.animator.setCenter(animator.center, inerialVelocity: .zero)
+		}
 	}
 	
 	@objc func didPan(_ recognizer: UIMultiPanGestureRecognizer) {
@@ -68,39 +72,59 @@ class WeightedGraphInteractor {
 				}
 				let velocity = self.velocityTracker.velocity(for: touch)
 				self.animator.endUserInteraction(on: id, with: velocity)
-				self.pannedViews.removeValue(forKey: touch)
 			}
-			endedTouches.forEach(velocityTracker.endTracking)
 			
 			newViews.flatMap {viewIDs[$0.1]}.forEach { id in
 				self.animator.beginUserInteraction(on: id)
 			}
 			pannedViews.merge(newViews, uniquingKeysWith: {a, _ in a})
 			
-			let (globalMovement, numberOfGlobalTouches) = movedTouches
-				.reduce((CGVector.zero, 0)) { acc, touch -> (CGVector, Int) in
-					let location = touch.location(in: self.view)
-					
-					if let view = pannedViews[touch], let id = viewIDs[view] {
-						self.animator.moveItem(for: id, to: location)
-						return acc
-					} else {
-						let (movement, count) = acc
-						
-						let previousLocation = touch.previousLocation(in: self.view)
-						
-						let dx = location.x - previousLocation.x
-						let dy = location.y - previousLocation.y
-						
-						return (CGVector(dx: movement.dx + dx, dy: movement.dy + dy), count + 1)
-					}
+			movedTouches.forEach { touch in
+				guard let view = pannedViews[touch], let id = viewIDs[view] else {
+					return
+				}
+				let location = touch.location(in: self.view)
+				self.animator.moveItem(for: id, to: location)
 			}
 			
-			animator.center.x += globalMovement.dx / CGFloat(max(1, numberOfGlobalTouches))
-			animator.center.y += globalMovement.dy / CGFloat(max(1, numberOfGlobalTouches))
+			let nonNodeMovedTouches = movedTouches.filter { touch in
+				self.pannedViews[touch].flatMap {self.viewIDs[$0]} == nil
+			}
+			
+			let globalMovement = nonNodeMovedTouches.reduce(CGVector.zero) { vector, touch in
+				let previousLocation = touch.previousLocation(in: self.view)
+				let location = touch.location(in: self.view)
+				
+				let dx = location.x - previousLocation.x
+				let dy = location.y - previousLocation.y
+				
+				return CGVector(dx: dx, dy: dy) + vector
+			}
+			
+			let nonNodeEndedTouches = endedTouches.filter { touch in
+				self.pannedViews[touch].flatMap {self.viewIDs[$0]} == nil
+			}
+			
+			if nonNodeMovedTouches.isEmpty && !nonNodeEndedTouches.isEmpty {
+				let globalVelocity: CGVector = nonNodeEndedTouches.map(velocityTracker.velocity).reduce(.zero) { velocity, touchVelocity in
+					return velocity + touchVelocity
+				}
+				animator.setCenter(
+					animator.center + globalMovement * (1 / CGFloat(max(1, nonNodeMovedTouches.count))),
+					inerialVelocity: globalVelocity
+				)
+			} else {
+				animator.setCenter(animator.center + globalMovement * (1 / CGFloat(max(1, nonNodeMovedTouches.count))))
+			}
+			
+			endedTouches.forEach { touch in
+				self.pannedViews.removeValue(forKey: touch)
+			}
 			
 			knownTouches.subtract(endedTouches)
 			knownTouches.formUnion(newTouches)
+			
+			endedTouches.forEach(velocityTracker.endTracking)
 		}
 		
 		switch recognizer.state {

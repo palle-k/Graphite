@@ -25,6 +25,7 @@
 
 import Foundation
 import Accelerate
+import UIKit
 
 extension Sequence {
 	func pick(_ n: Int) -> [Element] {
@@ -51,5 +52,27 @@ extension Sequence {
 extension CGRect {
 	func extended(by length: CGFloat) -> CGRect {
 		return CGRect(x: minX - length, y: minY - length, width: width + 2 * length, height: height + 2 * length)
+	}
+}
+
+extension CGVector {
+	static func + (lhs: CGVector, rhs: CGVector) -> CGVector {
+		return CGVector(dx: lhs.dx + rhs.dx, dy: lhs.dy + rhs.dy)
+	}
+	
+	static func * (lhs: CGVector, rhs: CGFloat) -> CGVector {
+		return CGVector(dx: lhs.dx * rhs, dy: lhs.dy * rhs)
+	}
+	
+	static func * (lhs: CGFloat, rhs: CGVector) -> CGVector {
+		return rhs * lhs
+	}
+	
+	static func + (lhs: CGPoint, rhs: CGVector) -> CGPoint {
+		return CGPoint(x: lhs.x + rhs.dx, y: lhs.y + rhs.dy)
+	}
+	
+	static func + (lhs: CGVector, rhs: CGPoint) -> CGPoint {
+		return rhs + lhs
 	}
 }

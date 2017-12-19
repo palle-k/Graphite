@@ -35,6 +35,7 @@ open class GraphWeightView: UIView {
 	}
 	
 	var onLayout: (() -> ())? = nil
+	var onTouchesBegan: (() -> ())? = nil
 	
 	open override func awakeFromNib() {
 		super.awakeFromNib()
@@ -64,5 +65,10 @@ open class GraphWeightView: UIView {
 	open override func layoutSubviews() {
 		super.layoutSubviews()
 		onLayout?()
+	}
+	
+	open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		super.touchesBegan(touches, with: event)
+		onTouchesBegan?()
 	}
 }

@@ -81,12 +81,18 @@ open class WeightedGraphSimulator {
 			assert(center.count == dimensions, "Number of dimensions and dimensionality of center point must match.")
 		}
 	}
+	open var centerVelocity: [Float] {
+		didSet {
+			assert(centerVelocity.count == dimensions, "Number of dimensions and dimensionality of center velocity must match.")
+		}
+	}
 	
 	public init(dimensions: Int, graph: Graph, center: [Float]) {
 		precondition(dimensions == center.count, "Number of dimensions and dimensionality of center point must match.")
 		
 		self.dimensions = dimensions
 		self.center = center
+		self.centerVelocity = Array(repeating: 0, count: dimensions)
 		self.graph = graph
 	}
 	
@@ -97,7 +103,7 @@ open class WeightedGraphSimulator {
 		
 		// Write new positions
 		applyVelocities(interval: interval)
-		recenterGraph()
+		recenterGraph(interval: interval)
 	}
 	
 	@inline(__always)
@@ -166,11 +172,16 @@ open class WeightedGraphSimulator {
 	}
 	
 	@inline(__always)
-	private func recenterGraph() {
+	private func recenterGraph(interval: TimeInterval) {
 		let centerDirection = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
 		defer {
 			centerDirection.deallocate(capacity: dimensions)
 		}
+		
+		vDSP_vsma(centerVelocity, 1, [Float(interval)], center, 1, &center, 1, UInt(dimensions))
+		vDSP_vsmul(centerVelocity, 1, [1 - damping * Float(interval)], &centerVelocity, 1, UInt(dimensions))
+//		vDSP_vsadd(centerDirection, 1, [-damping * Float(interval)], &centerVelocity, 1, UInt(dimensions))
+//		vDSP_vclip(centerDirection, 1, [0], [1], &centerVelocity, 1, UInt(dimensions))
 		
 		var nodeCenter = nodes.reduce(into: [Float](repeating: 0, count: dimensions)) { (result: inout ([Float]), element) in
 			vDSP_vadd(result, 1, element.value.position, 1, &result, 1, UInt(self.dimensions))

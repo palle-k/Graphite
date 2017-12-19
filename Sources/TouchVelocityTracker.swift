@@ -47,7 +47,7 @@ class TouchVelocityTracker {
 			
 			let vector = CGVector(dx: (location.x - previousLocation.x) / delta, dy: (location.y - previousLocation.y) / delta)
 			
-			let decay = min(delta * 5, 1)
+			let decay = min(delta * 10, 1)
 			
 			newVector = CGVector(
 				dx: lastVector.dx * (1 - decay) + vector.dx * decay,
