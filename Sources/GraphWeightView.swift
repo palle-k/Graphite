@@ -37,9 +37,23 @@ open class GraphWeightView: UIView {
 	var onLayout: (() -> ())? = nil
 	var onTouchesBegan: (() -> ())? = nil
 	
-	open override func awakeFromNib() {
-		super.awakeFromNib()
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+		initialize()
+	}
+	
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		initialize()
+	}
+	
+	open override func didMoveToWindow() {
+		super.didMoveToWindow()
 		
+		self.layer.contentsScale = self.window?.screen.scale ?? UIScreen.main.scale
+	}
+	
+	private func initialize() {
 		self.layer.contentsScale = UIScreen.main.scale
 		self.layer.drawsAsynchronously = true
 		self.layer.setNeedsDisplay()
