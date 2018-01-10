@@ -22,6 +22,8 @@ class WeightedGraphInteractor {
 	private var pannedViews: [UITouch: UIView] = [:]
 	private var velocityTracker = TouchVelocityTracker()
 	
+	var onPinch: (() -> ())?
+	
 	init(view: GraphWeightView, animator: UIWeightedGraphAnimator) {
 		self.view = view
 		self.animator = animator
@@ -167,5 +169,7 @@ class WeightedGraphInteractor {
 		default:
 			break
 		}
+		
+		onPinch?()
 	}
 }

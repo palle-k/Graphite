@@ -29,6 +29,7 @@ import UIKit
 public protocol WeightedGraphPresenterDelegate: class {
 	func view(for node: Int, presenter: WeightedGraphPresenter) -> UIView
 	func configure(view: UIView, for node: Int, presenter: WeightedGraphPresenter)
+	func visibleRange(for node: Int, presenter: WeightedGraphPresenter) -> ClosedRange<Float>?
 }
 
 public class WeightedGraphPresenter {
@@ -126,6 +127,10 @@ public class WeightedGraphPresenter {
 			}
 		}
 		observations += [o1, o2]
+		
+		interactor.onPinch = { [weak self] in
+			self?.updateVisibility()
+		}
 	}
 	
 	deinit {
@@ -186,6 +191,8 @@ public class WeightedGraphPresenter {
 				}
 			}
 		) // UIView.animate
+		
+		updateVisibility()
 	}
 	
 	public func start() {
@@ -196,5 +203,12 @@ public class WeightedGraphPresenter {
 	public func stop() {
 		isStarted = false
 		animator.stop()
+	}
+	
+	private func updateVisibility() {
+		for (node, view) in self.interactor.nodeViews {
+			let visibleRange = self.delegate?.visibleRange(for: node, presenter: self) ?? (-Float.infinity ... Float.infinity)
+			view.isHidden = !(visibleRange ~= Float(self.animator.radius))
+		}
 	}
 }
