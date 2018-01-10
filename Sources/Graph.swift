@@ -27,19 +27,31 @@ import Foundation
 
 public struct Graph: Codable {
 	public struct Edge: Codable {
-		public var nodes: Set<Int>
+		public var nodes: Set<Node>
 		public var weight: Float
 		
-		public init(nodes: Set<Int>, weight: Float) {
+		public init(nodes: Set<Node>, weight: Float) {
 			self.nodes = nodes
 			self.weight = weight
 		}
 	}
 	
-	public var nodes: Set<Int>
+	public struct Node: Codable {
+		public var id: Int
+		public var minScale: Float
+		public var maxScale: Float
+		
+		public init(id: Int, minScale: Float = -Float.infinity, maxScale: Float = Float.infinity) {
+			self.id = id
+			self.minScale = minScale
+			self.maxScale = maxScale
+		}
+	}
+	
+	public var nodes: Set<Node>
 	public var edges: Set<Edge>
 	
-	public init<NodeSequence: Sequence, EdgeSequence: Sequence>(nodes: NodeSequence, edges: EdgeSequence) where NodeSequence.Element == Int, EdgeSequence.Element == Edge {
+	public init<NodeSequence: Sequence, EdgeSequence: Sequence>(nodes: NodeSequence, edges: EdgeSequence) where NodeSequence.Element == Node, EdgeSequence.Element == Edge {
 		self.nodes = Set(nodes)
 		self.edges = Set(edges)
 	}
@@ -52,6 +64,16 @@ extension Graph.Edge: Hashable {
 	
 	public static func ==(lhs: Graph.Edge, rhs: Graph.Edge) -> Bool {
 		return lhs.nodes == rhs.nodes && lhs.weight == rhs.weight
+	}
+}
+
+extension Graph.Node: Hashable {
+	public var hashValue: Int {
+		return self.id.hashValue
+	}
+	
+	public static func == (lhs: Graph.Node, rhs: Graph.Node) -> Bool {
+		return lhs.id == rhs.id
 	}
 }
 

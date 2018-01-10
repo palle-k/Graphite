@@ -10,8 +10,13 @@ import Foundation
 import UIKit
 
 class WeightedGraphInteractor {
-	var nodeViews: [Int: UIView] = [:]
-	private var viewIDs: [UIView: Int] {
+	var nodeViews: [Graph.Node: UIView] = [:] {
+		didSet {
+			updateVisibility()
+		}
+	}
+	
+	private var viewIDs: [UIView: Graph.Node] {
 		return Dictionary(nodeViews.map {($1, $0)}, uniquingKeysWith: {a, _ in a})
 	}
 	
@@ -155,6 +160,8 @@ class WeightedGraphInteractor {
 		case .changed:
 			if let startRadius = self.startRadius {
 				animator.radius = startRadius * recognizer.scale
+				
+				updateVisibility()
 			}
 			break
 			
@@ -166,6 +173,12 @@ class WeightedGraphInteractor {
 			
 		default:
 			break
+		}
+	}
+	
+	private func updateVisibility() {
+		for (node, view) in self.nodeViews {
+			view.isHidden = !(node.minScale...node.maxScale ~= Float(animator.radius))
 		}
 	}
 }

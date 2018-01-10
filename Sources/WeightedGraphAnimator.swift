@@ -29,7 +29,7 @@ import QuartzCore
 
 open class UIWeightedGraphAnimator {
 	
-	public private(set) var items: [Int: UIDynamicItem] = [:]
+	public private(set) var items: [Graph.Node: UIDynamicItem] = [:]
 	open var bounds: CGRect
 	open let simulator: WeightedGraphSimulator
 	open var onUpdate: (() -> ())? = nil
@@ -132,28 +132,28 @@ open class UIWeightedGraphAnimator {
 		lastUpdate = nil
 	}
 	
-	public func add(item: UIDynamicItem, for key: Int) {
+	public func add(item: UIDynamicItem, for key: Graph.Node) {
 		items[key] = item
 	}
 	
-	public func removeItem(for key: Int) {
+	public func removeItem(for key: Graph.Node) {
 		items[key] = nil
 	}
 	
-	public func beginUserInteraction(on node: Int) {
+	public func beginUserInteraction(on node: Graph.Node) {
 		simulator.beginUserInteraction(on: node)
 	}
 	
-	public func moveItem(for key: Int, to destination: CGPoint) {
+	public func moveItem(for key: Graph.Node, to destination: CGPoint) {
 		let translatedPoint = destination.applying(transform.inverted())
 		simulator.set(location: [translatedPoint.x, translatedPoint.y].map(Float.init), for: key)
 	}
 	
-	public func endUserInteraction(on node: Int) {
+	public func endUserInteraction(on node: Graph.Node) {
 		simulator.endUserInteraction(on: node)
 	}
 	
-	public func endUserInteraction(on node: Int, with velocity: CGVector) {
+	public func endUserInteraction(on node: Graph.Node, with velocity: CGVector) {
 		simulator.endUserInteraction(on: node, with: [Float(velocity.dx / transform.a), Float(velocity.dy / transform.d)])
 	}
 	

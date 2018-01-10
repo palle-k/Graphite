@@ -27,8 +27,8 @@ import Foundation
 import UIKit
 
 public protocol WeightedGraphPresenterDelegate: class {
-	func view(for node: Int, presenter: WeightedGraphPresenter) -> UIView
-	func configure(view: UIView, for node: Int, presenter: WeightedGraphPresenter)
+	func view(for node: Graph.Node, presenter: WeightedGraphPresenter) -> UIView
+	func configure(view: UIView, for node: Graph.Node, presenter: WeightedGraphPresenter)
 }
 
 public class WeightedGraphPresenter {
