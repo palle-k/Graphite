@@ -65,10 +65,10 @@ open class WeightedGraphSimulator {
 		}
 	}
 	
-	private var weights: [Graph.Node: [Graph.Node: Float]] = [:]
+	private var weights: [Int: [Int: Float]] = [:]
 	
-	private var nodes: [Graph.Node: (position: UnsafeMutablePointer<Float>, velocity: UnsafeMutablePointer<Float>)] = [:]
-	public var nodePositions: [Graph.Node: UnsafePointer<Float>] {
+	private var nodes: [Int: (position: UnsafeMutablePointer<Float>, velocity: UnsafeMutablePointer<Float>)] = [:]
+	public var nodePositions: [Int: UnsafePointer<Float>] {
 		return nodes.mapValues { position, _ in
 			UnsafePointer(position)
 		}
@@ -79,7 +79,7 @@ open class WeightedGraphSimulator {
 	open var radius: Float = 2
 	open var collisionRadius: Float = 0.5
 	
-	public private(set) var interactedTags: Set<Graph.Node> = []
+	public private(set) var interactedTags: Set<Int> = []
 	
 	open var center: [Float] {
 		didSet {
@@ -199,7 +199,7 @@ open class WeightedGraphSimulator {
 		}
 	}
 	
-	func position(for tag: Graph.Node) -> [Float] {
+	func position(for tag: Int) -> [Float] {
 		if dimensions == 2 {
 			let angle = Float(drand48()) * 2 * .pi
 			return [
@@ -235,22 +235,22 @@ open class WeightedGraphSimulator {
 		vDSP_vsma(dir, 1, [1 / (distance + 1) * factor], result, 1, result, 1, UInt(dimensions))
 	}
 	
-	public func set(location: [Float], for key: Graph.Node) {
+	public func set(location: [Float], for key: Int) {
 		guard let (l, _) = nodes[key] else {
 			return
 		}
 		l.assign(from: location, count: dimensions)
 	}
 	
-	public func beginUserInteraction(on node: Graph.Node) {
+	public func beginUserInteraction(on node: Int) {
 		interactedTags.insert(node)
 	}
 	
-	public func endUserInteraction(on node: Graph.Node) {
+	public func endUserInteraction(on node: Int) {
 		interactedTags.remove(node)
 	}
 	
-	public func endUserInteraction(on node: Graph.Node, with velocity: [Float]) {
+	public func endUserInteraction(on node: Int, with velocity: [Float]) {
 		interactedTags.remove(node)
 		guard let (_, v) = nodes[node] else {
 			return
