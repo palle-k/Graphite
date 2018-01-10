@@ -157,6 +157,14 @@ open class UIWeightedGraphAnimator {
 		simulator.endUserInteraction(on: node, with: [Float(velocity.dx / transform.a), Float(velocity.dy / transform.d)])
 	}
 	
+	public func disableForce(from node: Int) {
+		simulator.disableForce(from: node)
+	}
+	
+	public func enableForce(from node: Int) {
+		simulator.enableForce(from: node)
+	}
+	
 	public func setCenter(_ center: CGPoint) {
 		let transformed = center.applying(transform.inverted())
 		simulator.center = [transformed.x, transformed.y].map(Float.init)

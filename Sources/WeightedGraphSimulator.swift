@@ -79,7 +79,8 @@ open class WeightedGraphSimulator {
 	open var radius: Float = 2
 	open var collisionRadius: Float = 0.5
 	
-	public private(set) var interactedTags: Set<Int> = []
+	public private(set) var interactedNodes: Set<Int> = []
+	public private(set) var passiveNodes: Set<Int> = []
 	
 	open var center: [Float] {
 		didSet {
@@ -118,11 +119,11 @@ open class WeightedGraphSimulator {
 			direction.deallocate(capacity: dimensions)
 		}
 		
-		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedTags.contains(node) {
+		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedNodes.contains(node) {
 			
 			let nodeWeights = weights[node] ?? [:]
 			
-			for (key: otherNode, value: (position: otherPosition, velocity: _)) in nodes where otherNode != node {
+			for (key: otherNode, value: (position: otherPosition, velocity: _)) in nodes where otherNode != node && !passiveNodes.contains(otherNode) {
 				let weight = nodeWeights[otherNode] ?? 0
 				
 				self.directionVector(from: position, to: otherPosition, result: direction)
@@ -164,14 +165,14 @@ open class WeightedGraphSimulator {
 		}
 		vDSP_vsdiv(driftVelocity, 1, [Float(max(1, nodes.count))], &driftVelocity, 1, UInt(dimensions))
 		
-		for (key: node, value: (position: _, velocity: velocity)) in nodes where !interactedTags.contains(node) {
+		for (key: node, value: (position: _, velocity: velocity)) in nodes where !interactedNodes.contains(node) {
 			vDSP_vsub(driftVelocity, 1, velocity, 1, velocity, 1, UInt(dimensions))
 		}
 	}
 	
 	@inline(__always)
 	private final func applyVelocities(interval: TimeInterval) {
-		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedTags.contains(node) {
+		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedNodes.contains(node) {
 			vDSP_vsma(velocity, 1, [Float(interval)], position, 1, position, 1, UInt(dimensions))
 		}
 	}
@@ -194,7 +195,7 @@ open class WeightedGraphSimulator {
 		vDSP_vsdiv(nodeCenter, 1, [Float(max(1, nodes.count))], &nodeCenter, 1, UInt(dimensions))
 		directionVector(from: nodeCenter, to: self.center, result: centerDirection)
 		
-		for (key: node, value: (position: position, velocity: _)) in nodes where !interactedTags.contains(node) {
+		for (key: node, value: (position: position, velocity: _)) in nodes where !interactedNodes.contains(node) {
 			vDSP_vadd(position, 1, centerDirection, 1, position, 1, UInt(dimensions))
 		}
 	}
@@ -243,18 +244,26 @@ open class WeightedGraphSimulator {
 	}
 	
 	public func beginUserInteraction(on node: Int) {
-		interactedTags.insert(node)
+		interactedNodes.insert(node)
 	}
 	
 	public func endUserInteraction(on node: Int) {
-		interactedTags.remove(node)
+		interactedNodes.remove(node)
 	}
 	
 	public func endUserInteraction(on node: Int, with velocity: [Float]) {
-		interactedTags.remove(node)
+		interactedNodes.remove(node)
 		guard let (_, v) = nodes[node] else {
 			return
 		}
 		v.assign(from: velocity, count: dimensions)
+	}
+	
+	public func disableForce(from node: Int) {
+		passiveNodes.insert(node)
+	}
+	
+	public func enableForce(from node: Int) {
+		passiveNodes.remove(node)
 	}
 }

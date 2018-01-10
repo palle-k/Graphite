@@ -208,7 +208,14 @@ public class WeightedGraphPresenter {
 	private func updateVisibility() {
 		for (node, view) in self.interactor.nodeViews {
 			let visibleRange = self.delegate?.visibleRange(for: node, presenter: self) ?? (-Float.infinity ... Float.infinity)
-			view.isHidden = !(visibleRange ~= Float(self.animator.radius))
+			let isVisible = visibleRange ~= Float(self.animator.radius)
+			view.isHidden = !isVisible
+			
+			if isVisible {
+				animator.enableForce(from: node)
+			} else {
+				animator.disableForce(from: node)
+			}
 		}
 	}
 }

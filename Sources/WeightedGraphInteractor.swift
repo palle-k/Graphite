@@ -48,6 +48,7 @@ class WeightedGraphInteractor {
 					.subviews
 					.lazy
 					.reversed()
+					.filter({!$0.isHidden})
 					.first(where: {$0.frame.extended(by: 8).contains(location)})
 					else {
 						return nil
