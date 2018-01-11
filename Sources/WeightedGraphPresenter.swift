@@ -54,6 +54,20 @@ public class WeightedGraphPresenter {
 	
 	public weak var delegate: WeightedGraphPresenterDelegate?
 	
+	public var disablesForceOnHiddenNodes: Bool = true {
+		didSet {
+			updateVisibility()
+		}
+	}
+	public var showsHiddenNodeEdges: Bool {
+		get {
+			return edgeView.showsHiddenNodeEdges
+		}
+		set {
+			edgeView.showsHiddenNodeEdges = newValue
+		}
+	}
+	
 	public var backgroundColor: UIColor {
 		get {
 			return edgeView.backgroundColor ?? view.backgroundColor ?? .clear
@@ -211,7 +225,7 @@ public class WeightedGraphPresenter {
 			let isVisible = visibleRange ~= Float(self.animator.radius)
 			view.isHidden = !isVisible
 			
-			if isVisible {
+			if isVisible || !disablesForceOnHiddenNodes {
 				animator.enableForce(from: node)
 			} else {
 				animator.disableForce(from: node)

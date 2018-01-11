@@ -37,6 +37,8 @@ open class GraphWeightView: UIView {
 	var onLayout: (() -> ())? = nil
 	var onTouchesBegan: (() -> ())? = nil
 	
+	public var showsHiddenNodeEdges: Bool = false
+	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 		initialize()
@@ -67,7 +69,7 @@ open class GraphWeightView: UIView {
 		ctx.clear(self.bounds)
 		ctx.setStrokeColor(strokeColor.cgColor)
 		
-		for (v1, v2, weight) in weights where !v1.isHidden && !v2.isHidden {
+		for (v1, v2, weight) in weights where showsHiddenNodeEdges || (!v1.isHidden && !v2.isHidden) {
 			ctx.move(to: v1.center)
 			ctx.addLine(to: v2.center)
 			ctx.setLineWidth(CGFloat(weight) * 3 + 2)
