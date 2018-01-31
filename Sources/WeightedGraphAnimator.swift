@@ -80,6 +80,15 @@ open class UIWeightedGraphAnimator {
 		}
 	}
 	
+	open var centerAttraction: CGFloat {
+		get {
+			return CGFloat(simulator.centerAttraction)
+		}
+		set {
+			simulator.centerAttraction = Float(newValue)
+		}
+	}
+	
 	public init(bounds: CGRect, graph: Graph) {
 		self.bounds = bounds
 		self.simulator = WeightedGraphSimulator(dimensions: 2, graph: graph, center: Array(repeating: 0.5, count: 2))

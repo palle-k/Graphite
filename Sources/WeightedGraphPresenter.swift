@@ -106,6 +106,15 @@ public class WeightedGraphPresenter {
 		}
 	}
 	
+	public var centerAttraction: CGFloat {
+		get {
+			return animator.centerAttraction
+		}
+		set {
+			animator.centerAttraction = newValue
+		}
+	}
+	
 	public init(graph: Graph, view: UIView) {
 		self.view = view
 		self.edgeView = GraphWeightView()

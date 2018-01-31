@@ -78,6 +78,7 @@ open class WeightedGraphSimulator {
 	public let dimensions: Int
 	open var radius: Float = 2
 	open var collisionRadius: Float = 0.5
+	open var centerAttraction: Float = 10
 	
 	public private(set) var interactedNodes: Set<Int> = []
 	public private(set) var passiveNodes: Set<Int> = []
@@ -151,7 +152,7 @@ open class WeightedGraphSimulator {
 			}
 			
 			// Applying acceleration towards center point
-			self.addCenterAcceleration(from: position, with: 10 * Float(interval) / radius, to: velocity, buffer: direction)
+			self.addCenterAcceleration(from: position, with: centerAttraction * Float(interval) / radius, to: velocity, buffer: direction)
 			
 			// Apply velocity damping
 			vDSP_vsmul(velocity, 1, [1 - damping * Float(interval)], velocity, 1, UInt(dimensions))
@@ -233,7 +234,7 @@ open class WeightedGraphSimulator {
 		var distanceSquared: Float = 0
 		vDSP_distancesq(point, 1, center, 1, &distanceSquared, UInt(dimensions))
 		let distance = sqrt(distanceSquared)
-		vDSP_vsma(dir, 1, [1 / (distance + 1) * factor], result, 1, result, 1, UInt(dimensions))
+		vDSP_vsma(dir, 1, [1 / max(sqrt(distance), 0.01) * factor], result, 1, result, 1, UInt(dimensions))
 	}
 	
 	public func set(location: [Float], for key: Int) {
