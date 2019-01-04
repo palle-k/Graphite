@@ -31,7 +31,7 @@ open class UIWeightedGraphAnimator {
 	
 	public private(set) var items: [Int: UIDynamicItem] = [:]
 	open var bounds: CGRect
-	open let simulator: WeightedGraphSimulator
+	public let simulator: WeightedGraphSimulator
 	open var onUpdate: (() -> ())? = nil
 	
 	private var displayLink: CADisplayLink?
@@ -129,7 +129,7 @@ open class UIWeightedGraphAnimator {
 		isRunning = true
 		let link = UIScreen.main.displayLink(withTarget: self, selector: #selector(self.run(link:)))
 			?? CADisplayLink(target: self, selector: #selector(self.run(link:)))
-		link.add(to: .main, forMode: .defaultRunLoopMode)
+		link.add(to: .main, forMode: RunLoop.Mode.default)
 		self.displayLink = link
 	}
 	

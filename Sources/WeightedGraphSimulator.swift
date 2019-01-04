@@ -50,8 +50,8 @@ open class WeightedGraphSimulator {
 			
 			for node in nodes.keys where !graph.nodes.contains(node) {
 				if let (position, velocity) = nodes[node] {
-					position.deallocate(capacity: dimensions)
-					velocity.deallocate(capacity: dimensions)
+					position.deallocate()
+					velocity.deallocate()
 				}
 				nodes[node] = nil
 			}
@@ -60,8 +60,8 @@ open class WeightedGraphSimulator {
 	
 	deinit {
 		nodes.values.forEach { position, velocity in
-			position.deallocate(capacity: dimensions)
-			velocity.deallocate(capacity: dimensions)
+			position.deallocate()
+			velocity.deallocate()
 		}
 	}
 	
@@ -117,7 +117,7 @@ open class WeightedGraphSimulator {
 	private final func updateRelationalVelocities(interval: TimeInterval) {
 		let direction = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
 		defer {
-			direction.deallocate(capacity: dimensions)
+			direction.deallocate()
 		}
 		
 		for (key: node, value: (position: position, velocity: velocity)) in nodes where !interactedNodes.contains(node) {
@@ -182,7 +182,7 @@ open class WeightedGraphSimulator {
 	private func recenterGraph(interval: TimeInterval) {
 		let centerDirection = UnsafeMutablePointer<Float>.allocate(capacity: dimensions)
 		defer {
-			centerDirection.deallocate(capacity: dimensions)
+			centerDirection.deallocate()
 		}
 		
 		vDSP_vsma(centerVelocity, 1, [Float(interval)], center, 1, &center, 1, UInt(dimensions))

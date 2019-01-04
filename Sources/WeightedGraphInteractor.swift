@@ -41,7 +41,7 @@ class WeightedGraphInteractor {
 	
 	@objc func didPan(_ recognizer: UIMultiPanGestureRecognizer) {
 		func updateContainer(newTouches: Set<UITouch>, movedTouches: Set<UITouch>, endedTouches: Set<UITouch>) {
-			let newViews = newTouches.flatMap { touch -> (UITouch, UIView)? in
+            let newViews = newTouches.compactMap { touch -> (UITouch, UIView)? in
 				let location = touch.location(in: self.view)
 				guard let view = self
 					.view
@@ -64,7 +64,7 @@ class WeightedGraphInteractor {
 				newViews.map{$1}.forEach { view in
 					view.transform = view.transform.concatenating(CGAffineTransform(scaleX: 1.3, y: 1.3))
 				}
-				endedTouches.flatMap {self.pannedViews[$0]}.forEach { view in
+                endedTouches.compactMap {self.pannedViews[$0]}.forEach { view in
 					view.transform = view.transform.concatenating(CGAffineTransform(scaleX: 1.3, y: 1.3).inverted())
 				}
 			}
@@ -77,7 +77,7 @@ class WeightedGraphInteractor {
 				self.animator.endUserInteraction(on: id, with: velocity)
 			}
 			
-			newViews.flatMap {viewIDs[$0.1]}.forEach { id in
+            newViews.compactMap {viewIDs[$0.1]}.forEach { id in
 				self.animator.beginUserInteraction(on: id)
 			}
 			pannedViews.merge(newViews, uniquingKeysWith: {a, _ in a})

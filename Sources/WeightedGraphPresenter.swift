@@ -139,12 +139,12 @@ public class WeightedGraphPresenter {
 		}
 		animator.integrationSteps = 1
 		
-		let o1 = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: .main) { [unowned self] _ in
+		let o1 = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { [unowned self] _ in
 			if self.isStarted {
 				self.animator.stop()
 			}
 		}
-		let o2 = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: .main) { [unowned self] _ in
+		let o2 = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] _ in
 			if self.isStarted {
 				self.animator.start()
 			}
@@ -163,10 +163,10 @@ public class WeightedGraphPresenter {
 	func update() {
 		let existingNodes = Set(interactor.nodeViews.keys)
 		let removedNodes = existingNodes.subtracting(graph.nodes)
-		let removedViews = removedNodes.flatMap{interactor.nodeViews[$0]}
+        let removedViews = removedNodes.compactMap{interactor.nodeViews[$0]}
 		
 		let changedNodes = existingNodes.intersection(graph.nodes)
-		let changedNodeViews = changedNodes.flatMap{ node in
+        let changedNodeViews = changedNodes.compactMap{ node in
 			interactor.nodeViews[node].map {(node, $0)}
 		}
 		
@@ -188,7 +188,7 @@ public class WeightedGraphPresenter {
 		
 		edgeView.weights.removeAll()
 		edgeView.weights = graph.edges.reduce([]) { acc, relation in
-			let views = relation.nodes.flatMap {self.interactor.nodeViews[$0]}
+            let views = relation.nodes.compactMap {self.interactor.nodeViews[$0]}
 			return acc + views.cross(views).filter {$0 != $1}.map {($0, $1, Double(relation.weight))}
 		}
 		
