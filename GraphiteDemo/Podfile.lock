@@ -1,0 +1,16 @@
+PODS:
+  - Graphite (0.0.16)
+
+DEPENDENCIES:
+  - Graphite
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Graphite
+
+SPEC CHECKSUMS:
+  Graphite: b2ae6c53979c3b0be1d1843690ecd3c049bf745f
+
+PODFILE CHECKSUM: 088240caff62de5165b449371e3a7387d06aa96f
+
+COCOAPODS: 1.6.1
