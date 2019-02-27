@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Graphite'
-  s.version = '0.0.15'
+  s.version = '0.0.16'
   s.license = 'MIT'
   s.summary = 'Simple force directed graph drawing for iOS'
   s.homepage = 'https://github.com/palle-k/Graphite'
