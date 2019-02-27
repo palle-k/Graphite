@@ -45,22 +45,6 @@ public struct Graph: Codable {
 	}
 }
 
-extension Graph.Edge: Hashable {
-	public var hashValue: Int {
-		return nodes.hashValue ^ weight.hashValue
-	}
-	
-	public static func ==(lhs: Graph.Edge, rhs: Graph.Edge) -> Bool {
-		return lhs.nodes == rhs.nodes && lhs.weight == rhs.weight
-	}
-}
+extension Graph.Edge: Hashable {}
 
-extension Graph: Hashable {
-	public var hashValue: Int {
-		return nodes.hashValue ^ edges.hashValue
-	}
-	
-	public static func ==(lhs: Graph, rhs: Graph) -> Bool {
-		return lhs.nodes == rhs.nodes && lhs.edges == rhs.edges
-	}
-}
+extension Graph: Hashable {}
